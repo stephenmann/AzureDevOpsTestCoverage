@@ -29,7 +29,7 @@ namespace TestCasesByOutcome
             }
 
             _log = log;
-            var result = new List<TestPoint>();
+            var result = new List<TestPointModel>();
 
             try
             {
@@ -40,14 +40,14 @@ namespace TestCasesByOutcome
                 foreach (var p in projects)
                 {
                     var runs = await GetTestRuns(org, p.Name);
-                    var suites = new List<TestSuiteReference>();
+                    var suites = new List<TestSuiteModel>();
                     int planid = 0;
                     foreach (var r in runs)
                     {
-                        var runDetail = await _helper.Execute<TestRunDetail>(r.url);
+                        var runDetail = await _helper.Execute<TestRunModel>(r.url);
                         if (runDetail.plan != null && planid != runDetail.plan.id)
                         {
-                            var sQueryResults = await _helper.Execute<RestClassHelper<TestSuiteReference[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/test/Plans/{runDetail.plan.id}/suites");
+                            var sQueryResults = await _helper.Execute<RestClassHelper<TestSuiteModel[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/test/Plans/{runDetail.plan.id}/suites");
                             suites.AddRange(sQueryResults?.value);
                             planid = runDetail.plan.id;
                         }
@@ -55,7 +55,7 @@ namespace TestCasesByOutcome
 
                     foreach (var s in suites)
                     {
-                        var tpQueryResult = await _helper.Execute<RestClassHelper<TestPoint[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/testplan/Plans/{s.plan.id}/Suites/{s.id}/TestPoint");
+                        var tpQueryResult = await _helper.Execute<RestClassHelper<TestPointModel[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/testplan/Plans/{s.plan.id}/Suites/{s.id}/TestPoint");
                         result.AddRange(tpQueryResult.value);
                     }
                 }

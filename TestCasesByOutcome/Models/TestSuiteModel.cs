@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestCasesByOutcome
 {
-    class TestSuiteReference { 
+    class TestSuiteModel { 
         public int id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
-        public Project project { get; set; }
-        public Plan plan { get; set; }
+        public ProjectModel project { get; set; }
+        public PlanModel plan { get; set; }
         public int revision { get; set; }
         public int testCaseCount { get; set; }
         public string suiteType { get; set; }

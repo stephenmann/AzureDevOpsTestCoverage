@@ -2,7 +2,7 @@
 
 namespace TestCasesByOutcome
 {
-    public class Project
+    public class ProjectModel
     {
         public string id { get; set; }
         public string name { get; set; }

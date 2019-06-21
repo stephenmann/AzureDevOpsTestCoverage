@@ -3,24 +3,6 @@ using System.Collections.Generic;
 
 namespace TestCasesByOutcome
 {
-
-    public class Link
-    {
-        public string href { get; set; }
-    }
-
-    public class Links
-    {
-        public Link avatar { get; set; }
-    }
-
-    public class Plan
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
     public class RunStatistic
     {
         public string state { get; set; }
@@ -28,7 +10,7 @@ namespace TestCasesByOutcome
         public int count { get; set; }
     }
 
-    internal class TestRunDetail
+    internal class TestRunModel
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -36,11 +18,11 @@ namespace TestCasesByOutcome
         public bool isAutomated { get; set; }
         public string iteration { get; set; }
         public User owner { get; set; }
-        public Project project { get; set; }
+        public ProjectModel project { get; set; }
         public DateTime startedDate { get; set; }
         public DateTime completedDate { get; set; }
         public string state { get; set; }
-        public Plan plan { get; set; }
+        public PlanModel plan { get; set; }
         public string postProcessState { get; set; }
         public int totalTests { get; set; }
         public int incompleteTests { get; set; }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TestCasesByOutcome
 {
@@ -9,13 +8,13 @@ namespace TestCasesByOutcome
         public string name { get; set; }
     }
 
-    public class TestPlan
+    public class TestPlanReference
     {
         public int id { get; set; }
         public string name { get; set; }
     }
 
-    public class TestSuite
+    public class TestSuiteReference
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -34,7 +33,7 @@ namespace TestCasesByOutcome
         public RunBy runBy { get; set; }
     }
 
-    public class Results
+    public class TestResults
     {
         public LastResultDetails lastResultDetails { get; set; }
         public int lastResultId { get; set; }
@@ -65,18 +64,18 @@ namespace TestCasesByOutcome
         public string state { get; set; }
     }
 
-    public class TestPoint
+    public class TestPointModel
     {
         public int id { get; set; }
         public User tester { get; set; }
         public Configuration configuration { get; set; }
         public bool isAutomated { get; set; }
-        public Project project { get; set; }
-        public TestPlan testPlan { get; set; }
-        public TestSuite testSuite { get; set; }
+        public ProjectModel project { get; set; }
+        public TestPlanReference testPlan { get; set; }
+        public TestSuiteReference testSuite { get; set; }
         public User lastUpdatedBy { get; set; }
         public DateTime lastUpdatedDate { get; set; }
-        public Results results { get; set; }
+        public TestResults results { get; set; }
         public DateTime lastResetToActive { get; set; }
         public bool isActive { get; set; }
         public TestPointLinks links { get; set; }
