@@ -39,20 +39,24 @@ namespace TestCasesByOutcome
                 var projects = await GetProjects(org);
                 foreach (var p in projects)
                 {
+                    _log.Info($"Getting all test runs for project {p.Name}");
                     var runs = await GetTestRuns(org, p.Name);
                     var suites = new List<TestSuiteModel>();
                     int planid = 0;
                     foreach (var r in runs)
                     {
+                        _log.Info($"Getting test details for run {r.id}");
                         var runDetail = await _helper.Execute<TestRunModel>(r.url);
                         if (runDetail.plan != null && planid != runDetail.plan.id)
                         {
+                            _log.Info($"Getting test suites for plan {runDetail.plan.name}");
                             var sQueryResults = await _helper.Execute<RestClassHelper<TestSuiteModel[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/test/Plans/{runDetail.plan.id}/suites");
                             suites.AddRange(sQueryResults?.value);
                             planid = runDetail.plan.id;
                         }
                     }
 
+                    _log.Info($"Getting all test plans for orginization {org}");
                     foreach (var s in suites)
                     {
                         var tpQueryResult = await _helper.Execute<RestClassHelper<TestPointModel[]>>($"https://dev.azure.com/{org}/{p.Name}/_apis/testplan/Plans/{s.plan.id}/Suites/{s.id}/TestPoint");
